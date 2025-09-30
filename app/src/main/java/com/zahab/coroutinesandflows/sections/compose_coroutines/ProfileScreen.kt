@@ -1,6 +1,5 @@
-package com.plcoding.coroutinesmasterclass.sections.compose_coroutines
+package com.zahab.coroutinesandflows.sections.compose_coroutines
 
-import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -23,40 +22,38 @@ import kotlinx.coroutines.launch
 fun ProfileScreen(
     modifier: Modifier = Modifier
 ) {
-    val snackbarState = remember {
-        SnackbarHostState()
-    }
-    val scope = rememberCoroutineScope()
-    var isShowingSnackbar by remember {
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+    var isSnackbarShowing by remember {
         mutableStateOf(false)
     }
+
     Scaffold(
-       snackbarHost = {
-           SnackbarHost(hostState = snackbarState)
-       }
-    ) { innerPadding ->
+        modifier = modifier,
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        }
+    ) { innerpadding ->
         Box(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
-                .padding(innerPadding),
+                .padding(innerpadding),
             contentAlignment = Alignment.Center
         ) {
-            Button(onClick = {
-                scope.launch {
-                    isShowingSnackbar = true
-                    snackbarState.showSnackbar(
-                        message = "Hello world!"
-                    )
-                    isShowingSnackbar = false
-                }
-            }) {
-                Text(
-                    text = if(isShowingSnackbar) {
-                        "Snackbar showing!"
-                    } else {
-                        "Snackbar not showing!"
+            // Centered Button
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        isSnackbarShowing = true
+                        snackbarHostState.showSnackbar("Hello from Snackbar!")
+                        isSnackbarShowing = false
                     }
-                )
+
+
+                },
+            ) {
+                Text(text = if (isSnackbarShowing) "Snackbar is showing" else "Snackbar is hidden")
             }
         }
     }

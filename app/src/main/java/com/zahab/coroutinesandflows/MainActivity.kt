@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.zahab.coroutinesandflows.sections.compose_coroutines.CounterScreen
+import com.zahab.coroutinesandflows.sections.compose_coroutines.ProfileScreen
 import com.zahab.coroutinesandflows.ui.theme.CoroutinesAndFlowsTheme
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
             CoroutinesAndFlowsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-                    CounterScreen()
+                    ProfileScreen()
                 }
             }
         }
