@@ -22,19 +22,26 @@ import kotlinx.coroutines.delay
 fun CounterScreen(
     modifier: Modifier = Modifier
 ) {
-    var counter by remember {
-        mutableIntStateOf(0)
+//    var counter by remember {
+//        mutableIntStateOf(0)
+//    }
+
+    val counter by produceState(initialValue = 0) {
+        while(true) {
+            delay(1000L)
+            value++
+        }
     }
 
-    LaunchedEffect(counter) {
-        delay(1000L)
-        println("Launched effect called")
-    }
+
+//    LaunchedEffect(counter) {
+//        delay(1000L)
+//        println("Launched effect called")
+//    }
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 
         Button(modifier = Modifier.wrapContentSize(), onClick = {
-            counter++
         }) {
             Text(
                 text = "Counter is : $counter"
