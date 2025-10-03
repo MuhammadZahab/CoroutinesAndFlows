@@ -14,7 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.zahab.coroutinesandflows.sections.compose_coroutines.ProfileScreen
 import com.zahab.coroutinesandflows.sections.coroutine_context.queryDatabase
+import com.zahab.coroutinesandflows.sections.coroutine_context.withContextDemo
 import com.zahab.coroutinesandflows.ui.theme.CoroutinesAndFlowsTheme
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -28,8 +30,8 @@ class MainActivity : ComponentActivity() {
 
         // assignment1()
 
-        lifecycleScope.launch {
-            queryDatabase()
+        GlobalScope.launch {
+            withContextDemo()
         }
         setContent {
             CoroutinesAndFlowsTheme {
