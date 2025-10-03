@@ -13,18 +13,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.zahab.coroutinesandflows.sections.compose_coroutines.ProfileScreen
+import com.zahab.coroutinesandflows.sections.coroutine_context.queryDatabase
 import com.zahab.coroutinesandflows.ui.theme.CoroutinesAndFlowsTheme
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-      assignment1()
+        // assignment1()
 
+        lifecycleScope.launch {
+            queryDatabase()
+        }
         setContent {
             CoroutinesAndFlowsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -61,13 +67,13 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+
         lifecycleScope.launch {
             delay(10000L)
             println("Cancelling all coroutines")
             mainThread.cancel()
         }
     }
-
 
 
 }
