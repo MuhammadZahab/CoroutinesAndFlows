@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.zahab.coroutinesandflows.sections.compose_coroutines.ProfileScreen
+import com.zahab.coroutinesandflows.sections.coroutine_context.ioDefaultDispatcher
 import com.zahab.coroutinesandflows.sections.coroutine_context.queryDatabase
 import com.zahab.coroutinesandflows.sections.coroutine_context.withContextDemo
 import com.zahab.coroutinesandflows.ui.theme.CoroutinesAndFlowsTheme
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
         // assignment1()
 
         GlobalScope.launch {
-            withContextDemo()
+            ioDefaultDispatcher()
         }
         setContent {
             CoroutinesAndFlowsTheme {
