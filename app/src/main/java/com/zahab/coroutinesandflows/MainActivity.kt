@@ -13,11 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.zahab.coroutinesandflows.sections.compose_coroutines.ProfileScreen
+import com.zahab.coroutinesandflows.sections.coroutine_cancellation.pollingTask
 import com.zahab.coroutinesandflows.sections.coroutine_context.ioDefaultDispatcher
 import com.zahab.coroutinesandflows.sections.coroutine_context.queryDatabase
 import com.zahab.coroutinesandflows.sections.coroutine_context.unconfinedDispatcher
 import com.zahab.coroutinesandflows.sections.coroutine_context.withContextDemo
 import com.zahab.coroutinesandflows.ui.theme.CoroutinesAndFlowsTheme
+import com.zahab.coroutinesandflows.utils.api.HttpClientFactory
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngineFactory
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
@@ -30,10 +34,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        val client = HttpClientFactory.create()
+
         // assignment1()
 
-        GlobalScope.launch {
-            unconfinedDispatcher()
+        lifecycleScope.launch {
+            pollingTask(client)
         }
         setContent {
             CoroutinesAndFlowsTheme {
